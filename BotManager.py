@@ -1,5 +1,4 @@
 import discord
-import random
 from discord.ext import commands
 
 intents = discord.Intents.all()
