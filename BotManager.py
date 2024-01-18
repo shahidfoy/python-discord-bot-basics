@@ -1,12 +1,17 @@
+import asyncio
 import discord
 import random
 from discord.ext import commands
+from cogs.DemoCog import AlertCog
 
 intents = discord.Intents.all()
 intents.message_content = True
 intents.members = True
 
 bot = commands.Bot(command_prefix="!", intents=intents, help_command=None)
+
+def is_me(ctx):
+    return ctx.author.id == "<your-discord-user-id>"
 
 @bot.event
 async def on_ready():
@@ -76,4 +81,18 @@ async def help(ctx):
     MyEmbed.add_field(name = "!rps", value = "This command allows you to play a game of rock paper scissors with the boot. 👊 = rock, ✋ = paper, ✌️ = scissors", inline = False)
     await ctx.send(embed = MyEmbed)
 
+@bot.command()
+@commands.check(is_me)
+async def unloadAlert(ctx):
+    await bot.remove_cog('AlertCog')
+
+@bot.command()
+@commands.check(is_me)
+async def reloadAlert(ctx):
+    await bot.add_cog(AlertCog(bot))
+
+async def startcog():
+   await bot.add_cog(AlertCog(bot))
+
+asyncio.run(startcog())
 bot.run("<BOT-SDK-KEY>")

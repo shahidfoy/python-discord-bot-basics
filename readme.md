@@ -63,3 +63,7 @@ Copy the url and open a browser page and paste the url in the browser. This will
 ## Discord.py Events
 Discord.py event reference:
 https://discordpy.readthedocs.io/en/stable/api.html#event-reference
+
+## Discord.py Cog
+Discord.py cog reference:
+https://discordpy.readthedocs.io/en/stable/ext/commands/api.html?highlight=cog#cog
