@@ -4,6 +4,8 @@ import random
 from discord.ext import commands
 from cogs.DemoCog import AlertCog
 from cogs.ModCog import ModeratorRoleCog
+from cogs.AdminCog import OwnerCog
+import utils.BotUtil as util
 
 intents = discord.Intents.all()
 intents.message_content = True
@@ -11,8 +13,6 @@ intents.members = True
 
 bot = commands.Bot(command_prefix="!", intents=intents, help_command=None)
 
-def is_me(ctx):
-    return ctx.author.id == "<your-discord-user-id>"
 
 @bot.event
 async def on_ready():
@@ -83,28 +83,39 @@ async def help(ctx):
     await ctx.send(embed = MyEmbed)
 
 @bot.command()
-@commands.check(is_me)
+@commands.check(util.is_me)
 async def unloadAlert(ctx):
     await bot.remove_cog('AlertCog')
 
 @bot.command()
-@commands.check(is_me)
+@commands.check(util.is_me)
 async def reloadAlert(ctx):
     await bot.add_cog(AlertCog(bot))
 
 @bot.command()
-@commands.check(is_me)
+@commands.check(util.is_me)
 async def unloadModerator(ctx):
     await bot.remove_cog('ModeratorRoleCog')
 
 @bot.command()
-@commands.check(is_me)
+@commands.check(util.is_me)
 async def reloadModerator(ctx):
     await bot.add_cog(ModeratorRoleCog(bot))
+
+@bot.command()
+@commands.check(util.is_me)
+async def unloadOwner(ctx):
+    await bot.remove_cog('OwnerCog')
+
+@bot.command()
+@commands.check(util.is_me)
+async def reloadOwner(ctx):
+    await bot.add_cog(OwnerCog(bot))
 
 async def startcog():
    await bot.add_cog(AlertCog(bot))
    await bot.add_cog(ModeratorRoleCog(bot))
+   await bot.add_cog(OwnerCog(bot))
 
 asyncio.run(startcog())
 bot.run("<BOT-SDK-KEY>")
