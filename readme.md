@@ -7,7 +7,6 @@
 - 6. mod cog
 - 7. admin cog
 - 8. poll cog
-- 9. hosting your bot on heroku
 
 ## Installing discory.py library
 Before we can make any bots, we first have to install the discord.py library. Here's how to do that:
