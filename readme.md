@@ -67,3 +67,8 @@ https://discordpy.readthedocs.io/en/stable/api.html#event-reference
 ## Discord.py Cog
 Discord.py cog reference:
 https://discordpy.readthedocs.io/en/stable/ext/commands/api.html?highlight=cog#cog
+
+## Discord.py Tasks
+Discord.py task reference:
+https://discordpy.readthedocs.io/en/stable/ext/tasks/index.html?highlight=task
+
