@@ -3,6 +3,7 @@ import discord
 import random
 from discord.ext import commands
 from cogs.DemoCog import AlertCog
+from cogs.ModCog import ModeratorRoleCog
 
 intents = discord.Intents.all()
 intents.message_content = True
@@ -91,8 +92,19 @@ async def unloadAlert(ctx):
 async def reloadAlert(ctx):
     await bot.add_cog(AlertCog(bot))
 
+@bot.command()
+@commands.check(is_me)
+async def unloadModerator(ctx):
+    await bot.remove_cog('ModeratorRoleCog')
+
+@bot.command()
+@commands.check(is_me)
+async def reloadModerator(ctx):
+    await bot.add_cog(ModeratorRoleCog(bot))
+
 async def startcog():
    await bot.add_cog(AlertCog(bot))
+   await bot.add_cog(ModeratorRoleCog(bot))
 
 asyncio.run(startcog())
 bot.run("<BOT-SDK-KEY>")
