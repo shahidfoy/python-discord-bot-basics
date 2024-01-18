@@ -5,6 +5,7 @@ from discord.ext import commands
 from cogs.DemoCog import AlertCog
 from cogs.ModCog import ModeratorRoleCog
 from cogs.AdminCog import OwnerCog
+from cogs.PollCog import PollAgent
 import utils.BotUtil as util
 
 intents = discord.Intents.all()
@@ -112,10 +113,21 @@ async def unloadOwner(ctx):
 async def reloadOwner(ctx):
     await bot.add_cog(OwnerCog(bot))
 
+@bot.command()
+@commands.check(util.is_me)
+async def unloadPoll(ctx):
+    await bot.remove_cog('PollAgent')
+
+@bot.command()
+@commands.check(util.is_me)
+async def reloadPoll(ctx):
+    await bot.add_cog(PollAgent(bot))
+
 async def startcog():
    await bot.add_cog(AlertCog(bot))
    await bot.add_cog(ModeratorRoleCog(bot))
    await bot.add_cog(OwnerCog(bot))
+   await bot.add_cog(PollAgent(bot))
 
 asyncio.run(startcog())
 bot.run("<BOT-SDK-KEY>")
