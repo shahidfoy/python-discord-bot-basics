@@ -35,13 +35,10 @@ class OwnerCog(commands.Cog):
     @commands.command()
     @commands.check(util.is_me)
     async def unban(self, ctx, *, input):
-        name, discriminator = input.split("#")
-        banned_members = await ctx.guild.bans(limit=150)
-        for banned_member in banned_members:
-            username = banned_member.user.name
-            disc = banned_member.user.discriminator
-            if name == username and discriminator == disc:
-                await ctx.guild.unban(banned_member.user)
+        async for entry in ctx.guild.bans():
+            username = entry.user.name
+            if input == username:
+                await ctx.guild.unban(entry.user)
 
     @commands.command()
     @commands.has_permissions(manage_messages = True)
